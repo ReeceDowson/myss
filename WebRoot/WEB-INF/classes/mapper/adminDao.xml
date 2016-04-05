@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ 
+<mapper namespace="com.reece.spring.dao.AdminDao">
+
+	<!-- 对应关系Map -->
+	<resultMap type="com.reece.spring.entity.Admin" id="adminMap">
+        <id property="adminId" column="ADMIN_ID"/>
+        <result property="adminCode" column="ADMIN_CODE"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="name" column="NAME"/>
+        <result property="telephone" column="TELEPHONE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="enrolldate" column="ENROLLDATE"/>
+        <result property="authorities" column="AUTHORITIES"/>
+    </resultMap>
+
+	<!-- 查找全部 -->
+	<select id="findAll" resultType="com.reece.spring.entity.Admin" resultMap="adminMap">
+		 select admin_id,
+		 		admin_code,
+		 		password,
+		 		name,
+		 		telephone,
+		 		email,
+		 		enrolldate,
+		 		authorities from admin_info
+	</select>
+	
+	<!-- 通过账户名查找 -->
+	<select id="findByAdminCode" parameterType="java.lang.String"
+	 	resultType="com.reece.spring.entity.Admin" resultMap="adminMap">
+	 	 select admin_id,
+				admin_code,
+				password,
+				name,
+				telephone,
+				email,
+				enrolldate,
+				authorities from admin_info
+				where admin_code = #{adminCode}
+	 </select>
+
+</mapper>
